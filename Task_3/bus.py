@@ -53,6 +53,7 @@ class Bus:
 
 def menu():
     bus = Bus(80, 30, 180)
+
     while True:
         print("Меню:")
         print("1. Посадка одного или нескольких пассажиров")
@@ -62,9 +63,11 @@ def menu():
         print("5. Текущая скорость автобуса")
         print("6. Увеличение скорости автобуса")
         print("7. Уменьшение скорости автобуса")
-        print("8. Выход")
+        print("8. Добавление пассажира/пассажира при помощи операции +=")
+        print("9. Высадка пассажира/пассажиров при помощи операции -=")
+        print("10. Выход")
 
-        choice = int(input("Выберите действие (1-8): "))
+        choice = int(input("Выберите действие (1-10): "))
 
         match choice:
             case 1:
@@ -91,6 +94,16 @@ def menu():
                 speed = int(input("На сколько вы хотите уменьшеить скорость автобуса: "))
                 bus.decrease_speed(speed)
             case 8:
+                passenger_input = input("Введите пассажира или пассажиров (через запятую): ")
+                passengers = passenger_input.split(",")
+                bus += passengers
+                print("Рассадка в автобусе:", bus.seat_map)
+            case 9:
+                passenger_input = input("Введите пассажира или пассажиров (через запятую): ")
+                passengers = passenger_input.split(",")
+                bus -= passengers
+                print("Рассадка в автобусе:", bus.seat_map)
+            case 10:
                 print("Выход из программы.")
                 break
             case _:
