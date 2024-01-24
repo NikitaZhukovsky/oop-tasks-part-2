@@ -1,8 +1,20 @@
 class Bus:
     def __init__(self, speed, max_seats, max_speed):
-        self.speed = speed
-        self.max_seats = max_seats
-        self.max_speed = max_speed
+        if isinstance(speed, (int, float)) and speed > 0:
+            self.speed = speed
+        else:
+            raise ValueError("Скорость должна быть положительным числом.")
+
+        if isinstance(max_seats, (int, float)) and max_seats > 0:
+            self.max_seats = max_seats
+        else:
+            raise ValueError("Количество мест должно быть положительным числом.")
+
+        if isinstance(max_speed, (int, float)) and max_speed > 0:
+            self.max_speed = max_speed
+        else:
+            raise ValueError("Максимальная скорость должна быть положительным числом.")
+
         self.passenger_list = []
         self.has_free_seats = True
         self.seat_map = {}
@@ -88,10 +100,24 @@ def menu():
             case 5:
                 print(f"Текущая скорость автобуса: {bus.speed}")
             case 6:
-                speed = int(input("На сколько вы хотите увеличить скорость автобуса: "))
+                state = True
+                while state:
+                    speed = input("На сколько вы хотите увеличить скорость автобуса: ")
+                    if speed.isdigit() and float(speed) > 0:
+                        speed = float(speed)
+                        state = False
+                    else:
+                        print("Ошибочный ввод, попробуйте ещё раз!")
                 bus.increase_speed(speed)
             case 7:
-                speed = int(input("На сколько вы хотите уменьшеить скорость автобуса: "))
+                state = True
+                while state:
+                    speed = input("На сколько вы хотите увеличить скорость автобуса: ")
+                    if speed.isdigit() and float(speed) > 0:
+                        speed = float(speed)
+                        state = False
+                    else:
+                        print("Ошибочный ввод, попробуйте ещё раз!")
                 bus.decrease_speed(speed)
             case 8:
                 passenger_input = input("Введите пассажира или пассажиров (через запятую): ")
