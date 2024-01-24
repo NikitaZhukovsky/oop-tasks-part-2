@@ -1,7 +1,15 @@
 class BeeElephant:
     def __init__(self, bee, elephant):
-        self.bee = bee
-        self.elephant = elephant
+        if isinstance(bee, (int, float)) and bee > 0:
+            self.bee = bee
+        else:
+            raise ValueError("Ошибка ввода!")
+
+        if isinstance(elephant, (int, float)) and elephant > 0:
+            self.elephant = elephant
+        else:
+            raise ValueError("Ошибка ввода!")
+
 
     def fly(self):
         return self.bee >= self.elephant
@@ -39,13 +47,22 @@ print(f"Часть слона не меньше части пчелы: {bee_elep
 
 state = True
 while state:
-    input_meal = input('Введите еду: ')
+    input_meal = input('Введите еду (grass or nectar): ')
     if input_meal == "grass" or input_meal == "nectar":
         state = False
     else:
         print("Неправильный ввод, попробуйте ещё раз!")
 
-bee_elephant.eat(input_meal, 20)
+state = True
+while state:
+    input_value = input("Введите сколько вы хотите съесть (целое число): ")
+    if input_value.isdigit() and int(input_value) > 0:
+        input_value = int(input_value)
+        state = False
+    else:
+        print("Ощибка ввода, попрбуйте ещё раз!")
+
+bee_elephant.eat(input_meal, input_value)
 print(f"Часть пчелы не меньше части слона: {bee_elephant.fly()}")
 print(f"Часть слона не меньше части пчелы: {bee_elephant.trumpet()}")
 
@@ -56,6 +73,16 @@ while state:
         state = False
     else:
         print("Неправильный ввод, попробуйте ещё раз!")
-bee_elephant.eat(input_meal, 50)
+
+state = True
+while state:
+    input_value = input("Введите сколько вы хотите съесть (целое число): ")
+    if input_value.isdigit() and int(input_value) > 0:
+        input_value = int(input_value)
+        state = False
+    else:
+        print("Ощибка ввода, попрбуйте ещё раз!")
+
+bee_elephant.eat(input_meal, input_value)
 print(f"Часть пчелы не меньше части слона: {bee_elephant.fly()}")
 print(f"Часть слона не меньше части пчелы: {bee_elephant.trumpet()}")
